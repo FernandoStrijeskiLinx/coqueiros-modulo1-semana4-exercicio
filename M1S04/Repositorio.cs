@@ -24,13 +24,15 @@ namespace M1S04
         }
         public static void AdicionarSuco(Suco suco){
             Sucos.Add(suco);
+            AdicionarBebida(suco);
         }
 
         public static void AdicionarRefrigerante(Refrigerante refrigerante){
             Refrigerantes.Add(refrigerante);
+            AdicionarBebida(refrigerante);
         }
 
-        public static void AdicionarBebida(Bebida bebida){
+        private static void AdicionarBebida(Bebida bebida){
             Bebidas.Add(bebida);
         }
         
@@ -49,7 +51,7 @@ namespace M1S04
                 Bebida? bebida = Bebidas.Find(x => x.Id == id);
                 if(bebida != null){
                     Bebidas.Remove(bebida);
-                }    
+                }                    
             }
             catch (System.Exception)
             {                
@@ -80,6 +82,21 @@ namespace M1S04
             {                
                 throw;
             } 
+        }
+        
+        public static Bebida? BuscarBebida(int id){            
+            try
+            {
+                return Bebidas.Where(w => w.Id == id).FirstOrDefault();
+            }
+            catch (System.Exception)
+            {                
+                throw;
+            } 
+        }
+
+        public static int QuantidadeBebidas(){
+            return Bebidas.Count;
         }
     }
 }

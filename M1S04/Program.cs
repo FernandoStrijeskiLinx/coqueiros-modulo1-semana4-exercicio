@@ -18,20 +18,20 @@ while (showMenu)
 
         case 2:
             Console.WriteLine("Você escolheu 'Alterar Bebida'! Precisamos coletar algumas informações:");
-            
+            Menu.AlterarBebida();
             showMenu = Menu.ReiniciarDisplay();
             break;
 
         case 3:
             Console.WriteLine("Você escolheu 'Excluir Bebida'! Informe o Id da bebida:");
-
+            //Menu.ExcluirBebida();
             
             showMenu = Menu.ReiniciarDisplay();
             break;
 
         case 4:
             Console.WriteLine("Você escolheu 'Listar todas as bebidas'!");
-
+            Repositorio.ListarTodasBebidas();
             showMenu = Menu.ReiniciarDisplay();
             break;
 

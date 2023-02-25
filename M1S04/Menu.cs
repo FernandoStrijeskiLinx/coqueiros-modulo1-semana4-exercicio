@@ -10,12 +10,12 @@ namespace M1S04
     /// </summary>
     public static class Menu
     {
-        public static List<Bebida> ListaBebidas { get; set; }
+        private static List<Bebida> ListaDeBebidas { get; set; }
         private static string? opcao;
 
         static Menu()
         {
-            ListaBebidas = new List<Bebida>();
+            ListaDeBebidas = new List<Bebida>();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace M1S04
         }
 
         /// <summary>
-        /// Digitar primeiro valor
+        /// Inserir uma bebida
         /// </summary>
         /// <returns></returns>
         public static void InserirBebida()
@@ -67,6 +67,7 @@ namespace M1S04
                 int tipo = 0;
                 bool vidro = false;
                 string tipoDeCaixa = "";
+                string nome = "";
 
                 do {
                     Console.Write("Informe o tipo da bebida: (1-Refrigerante ou 2-Suco)\n");
@@ -75,7 +76,7 @@ namespace M1S04
                 tipo = int.Parse(opcao);
 
                 Console.Write("Informe o nome da bebida:\n");
-                var nome = Console.ReadLine();
+                nome = Console.ReadLine();
 
                 Console.Write("Informe a quantidade de ml da bebida:\n");
                 decimal miliLitro = decimal.Parse(Console.ReadLine());
@@ -94,7 +95,7 @@ namespace M1S04
                         if(opcao=="S")
                             vidro = true;
 
-                        Refrigerante refrigerante = new Refrigerante(1, miliLitro, valorCompra, vidro);
+                        Refrigerante refrigerante = new Refrigerante(Repositorio.QuantidadeBebidas() + 1, nome, miliLitro, valorCompra, vidro);
                         Repositorio.AdicionarRefrigerante(refrigerante);
                     break;
 
@@ -102,7 +103,7 @@ namespace M1S04
                         Console.Write("Informe o tipo de caixa:\n");
                         tipoDeCaixa = Console.ReadLine();
 
-                        Suco suco = new Suco(1, miliLitro, valorCompra, tipoDeCaixa);
+                        Suco suco = new Suco(Repositorio.QuantidadeBebidas() + 1, nome, miliLitro, valorCompra, tipoDeCaixa);
                         Repositorio.AdicionarSuco(suco);
                     break;
                 }
@@ -116,6 +117,58 @@ namespace M1S04
                 Thread.Sleep(5000);
             }
         }
+
+/// <summary>
+        /// Inserir uma bebida
+        /// </summary>
+        /// <returns></returns>
+        public static void AlterarBebida()
+        {
+            try
+            {       
+                int tipo = 0;
+                bool vidro = false;
+                string tipoDeCaixa = "";
+                int id = 0;
+                do {
+                    Console.Write("Selecione qual bebida deseja alterar, informando o seu Id:\n");
+                    Repositorio.ListarTodasBebidas();
+                    opcao = Console.ReadLine();
+                } while(!ValorNumerico(opcao));                 
+                id = int.Parse(opcao);
+
+                Bebida bebidaAlterar = Repositorio.BuscarBebida(id);
+                if(bebidaAlterar == null){
+                    Console.Write("O Id informado para a bebida não existe! Aguarde 5 segundos para a tela carregar o display inicial\n");
+                    Thread.Sleep(5000);
+                    return;
+                }
+
+                Console.Write("Informe o nome da bebida:\n");
+                var nome = Console.ReadLine();
+
+                Console.Write("Informe a quantidade de ml da bebida:\n");
+                decimal miliLitro = decimal.Parse(Console.ReadLine());
+                
+                Console.Write("Informe o valor de compra da bebida:\n");
+                decimal valorCompra = decimal.Parse(Console.ReadLine());
+
+                bebidaAlterar.NomeBebida = nome;
+                bebidaAlterar.MiliLitro = miliLitro;
+                bebidaAlterar.ValorCompra = valorCompra;
+
+                Repositorio.AlterarBebida(bebidaAlterar);
+
+                Console.WriteLine("Bebida alterada com sucesso! Aguarde 5 segundos para a tela carregar o display inicial");
+                Thread.Sleep(5000);
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Falha no preenchimentos dos dados ao editar a bebida! Aguarde 5 segundos para a tela carregar o display inicial");
+                Thread.Sleep(5000);
+            }
+        }
+
 
         /// <summary>
         /// Opção selecionada
@@ -166,6 +219,23 @@ namespace M1S04
                     return false;
                 }
 
+                return true;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Opção inválida! Você deve preencher somente números.");
+                return false;
+            }
+        }
+
+        private static bool ValorNumerico(string? readLine){
+            try
+            {
+                if(readLine == null)
+                    return false;
+                    
+                var resultado = int.Parse(readLine); 
+                
                 return true;
             }
             catch (System.Exception)

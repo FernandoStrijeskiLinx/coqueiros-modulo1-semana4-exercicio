@@ -7,18 +7,19 @@ namespace M1S04
 {
     public class Bebida
     {
-        public Bebida(int id, decimal miliLitro, decimal valorCompra) 
-        {
-            this.Id = id;
-            this.MiliLitro = miliLitro;
-            this.ValorCompra = valorCompra;   
-        }
-
         public int Id { get; set; }
         public string? Tipo { get; set; }
         public decimal MiliLitro { get; set; }
         public string? NomeBebida { get; set; }
         public decimal ValorCompra { get; set; }    
+
+        public Bebida(int id, string nome, decimal miliLitro, decimal valorCompra) 
+        {
+            this.Id = id;
+            this.NomeBebida = nome;
+            this.MiliLitro = miliLitro;
+            this.ValorCompra = valorCompra;   
+        }
 
         public void Comprar(){            
             Console.WriteLine($"Valor da compra do produto id {Id} alterado para {ValorCompra}");

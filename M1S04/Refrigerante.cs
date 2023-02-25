@@ -8,8 +8,8 @@ namespace M1S04
     public class Refrigerante : Bebida
     {
         public bool Vidro { get; set; }
-        
-        public Refrigerante(int id, decimal miliLitro, decimal valorCompra, bool vidro) : base(id, miliLitro, valorCompra)
+
+        public Refrigerante(int id, string nome, decimal miliLitro, decimal valorCompra, bool vidro) : base(id, nome, miliLitro, valorCompra)
         {          
             this.Vidro = vidro;
         }

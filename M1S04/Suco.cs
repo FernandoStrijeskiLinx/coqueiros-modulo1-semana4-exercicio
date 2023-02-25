@@ -9,7 +9,7 @@ namespace M1S04
     {
         public string TipoDeCaixa { get; set; }
 
-        public Suco(int id, decimal miliLitro, decimal valorCompra, string tipoDeCaixa) : base(id, miliLitro, valorCompra)
+        public Suco(int id, string nome, decimal miliLitro, decimal valorCompra, string tipoDeCaixa) : base(id, nome, miliLitro, valorCompra)
         {          
             this.TipoDeCaixa = tipoDeCaixa;
         }
