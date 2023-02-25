@@ -7,11 +7,21 @@ namespace M1S04
 {
     public static class Repositorio
     {
-        public static List<Bebida> Bebidas { get; set; } = new List<Bebida>();
-        public static List<Suco> Sucos { get; set; } = new List<Suco>();
-        public static List<Refrigerante> Refrigerantes { get; set; } = new List<Refrigerante>();
+        private static List<Bebida>? Bebidas { get; set; }
+        private static List<Suco>? Sucos { get; set; } 
+        private static List<Refrigerante>? Refrigerantes { get; set; }
 
+        static Repositorio()
+        {
+            if(Bebidas == null)
+                Bebidas = new List<Bebida>();
 
+            if(Sucos == null)
+                Sucos = new List<Suco>();
+
+            if(Refrigerantes == null)
+                Refrigerantes = new List<Refrigerante>();
+        }
         public static void AdicionarSuco(Suco suco){
             Sucos.Add(suco);
         }
@@ -24,6 +34,15 @@ namespace M1S04
             Bebidas.Add(bebida);
         }
         
+        public static void AlterarBebida(Bebida bebida){
+            foreach (Bebida item in Bebidas.Where(w => w.Id == bebida.Id))
+            {
+                item.NomeBebida = bebida.NomeBebida;
+                item.Tipo = bebida.Tipo;
+                item.MiliLitro = bebida.MiliLitro;
+            }
+        }
+
         public static void ExcluirBebida(int id){
             try
             {
@@ -45,6 +64,16 @@ namespace M1S04
                 foreach (Bebida bebida in Bebidas)
                 {
                     Console.WriteLine($"{bebida.Id.ToString()} - {bebida.NomeBebida} - Quantidade ml: {bebida.MiliLitro.ToString("N2")}");
+                }
+
+                foreach (Suco bebida in Sucos)
+                {
+                    bebida.ImprimirDados();
+                }
+
+                foreach (Refrigerante refrigerante in Refrigerantes)
+                {
+                    refrigerante.ImprimirDados();
                 }
             }
             catch (System.Exception)
