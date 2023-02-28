@@ -7,9 +7,9 @@ namespace M1S04
 {
     public static class Repositorio
     {
-        private static List<Bebida>? Bebidas { get; set; }
-        private static List<Suco>? Sucos { get; set; } 
-        private static List<Refrigerante>? Refrigerantes { get; set; }
+        private static List<Bebida> Bebidas { get; set; }
+        private static List<Suco> Sucos { get; set; } 
+        private static List<Refrigerante> Refrigerantes { get; set; }
 
         static Repositorio()
         {
@@ -66,17 +66,18 @@ namespace M1S04
                 foreach (Bebida bebida in Bebidas)
                 {
                     Console.WriteLine($"{bebida.Id.ToString()} - {bebida.NomeBebida} - Quantidade ml: {bebida.MiliLitro.ToString("N2")}");
+                    Suco? suco = Sucos.Where(w => w.Id == bebida.Id).FirstOrDefault();
+                    if(suco != null)
+                        suco.ImprimirDados();
+
+                    Refrigerante? refrigerante = Refrigerantes.Where(w => w.Id == bebida.Id).FirstOrDefault();
+                    if(refrigerante != null)
+                        refrigerante.ImprimirDados();
+                    
                 }
 
-                foreach (Suco bebida in Sucos)
-                {
-                    bebida.ImprimirDados();
-                }
-
-                foreach (Refrigerante refrigerante in Refrigerantes)
-                {
-                    refrigerante.ImprimirDados();
-                }
+                Console.WriteLine("Pressione uma tecla para retornar ao menu inicial.\n");
+                Console.ReadLine();
             }
             catch (System.Exception)
             {                
@@ -84,6 +85,50 @@ namespace M1S04
             } 
         }
         
+        public static void ListarTodosSucos(){
+            try
+            {
+                Console.WriteLine($"Listando os sucos:");
+                foreach (Bebida bebida in Bebidas)
+                {                    
+                    Suco? suco = Sucos.Where(w => w.Id == bebida.Id).FirstOrDefault();
+                    if(suco != null){
+                        Console.WriteLine($"{bebida.Id.ToString()} - {bebida.NomeBebida} - Quantidade ml: {bebida.MiliLitro.ToString("N2")}");
+                        suco.ImprimirDados();                    
+                    }
+                }
+                
+                Console.WriteLine("Pressione uma tecla para retornar ao menu inicial.\n");
+                Console.ReadLine();
+            }
+            catch (System.Exception)
+            {                
+                throw;
+            } 
+        }
+        
+        public static void ListarTodosRefrigerantes(){
+            try
+            {
+                Console.WriteLine($"Listando os refrigerantes:");
+                foreach (Bebida bebida in Bebidas)
+                {
+                    Refrigerante? refrigerante = Refrigerantes.Where(w => w.Id == bebida.Id).FirstOrDefault();
+                    if(refrigerante != null){
+                        Console.WriteLine($"{bebida.Id.ToString()} - {bebida.NomeBebida} - Quantidade ml: {bebida.MiliLitro.ToString("N2")}");
+                        refrigerante.ImprimirDados();                  
+                    }
+                }
+                
+                Console.WriteLine("Pressione uma tecla para retornar ao menu inicial.\n");
+                Console.ReadLine();
+            }
+            catch (System.Exception)
+            {                
+                throw;
+            } 
+        }
+
         public static Bebida? BuscarBebida(int id){            
             try
             {

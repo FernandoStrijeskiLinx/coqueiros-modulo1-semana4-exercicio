@@ -14,8 +14,8 @@ namespace M1S04
             this.TipoDeCaixa = tipoDeCaixa;
         }
 
-        public void ImprimirDados(){
-            Console.WriteLine($"O produto id {this.Id} é um suco é do tipo {this.TipoDeCaixa} com quantidade de MiliLitros {this.MiliLitro}");            
+        public override void ImprimirDados(){
+            Console.WriteLine($" Descrição: O produto id {this.Id} é um suco é do tipo {this.TipoDeCaixa} com quantidade de MiliLitros {this.MiliLitro}");            
         }
     }
 }

@@ -25,5 +25,8 @@ namespace M1S04
             Console.WriteLine($"Valor da compra do produto id {Id} alterado para {ValorCompra}");
         }
 
+        public virtual void ImprimirDados(){
+            Console.WriteLine($" Descrição: O produto id {this.Id} é uma bebida com quantidade de MiliLitros {this.MiliLitro}");            
+        }
     }
 }

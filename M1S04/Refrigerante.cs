@@ -14,9 +14,8 @@ namespace M1S04
             this.Vidro = vidro;
         }
 
-
-        public void ImprimirDados(){
-            Console.WriteLine($"O produto id {this.Id} com nome {this.NomeBebida} é um refrigerante MiliLitros {this.MiliLitro} {(this.Vidro==true ? "e um vidro" : "e uma garrafa pet")}");            
+        public override void ImprimirDados(){
+            Console.WriteLine($" Descrição: O produto id {this.Id} com nome {this.NomeBebida} é um refrigerante MiliLitros {this.MiliLitro} {(this.Vidro==true ? "e um vidro" : "e uma garrafa pet")}");            
         }
     }
 }

@@ -33,29 +33,7 @@ namespace M1S04
             Console.WriteLine("6 - Listar todos os refrigerantes");
             Console.WriteLine("7 - Sair");
         }
-
-        /// <summary>
-        /// Opção para reiniciar o projeto
-        /// </summary>
-        /// <returns></returns>
-        public static bool ReiniciarDisplay()
-        {
-            Console.WriteLine("\n");
-            Console.WriteLine("Deseja continuar utilizando o GoDrink? ");
-            Console.WriteLine("------------------------------------------------");
-            Console.WriteLine("1 - Sim.");
-            Console.WriteLine("2 - Não.");
-            Console.WriteLine("\n");
-
-            if (Convert.ToInt32(Console.ReadLine()) == 1)
-            {
-                Menu.DisplayInicial();
-                return true;
-            }
-            else           
-                return false;            
-        }
-
+     
         /// <summary>
         /// Inserir uma bebida
         /// </summary>
@@ -67,7 +45,7 @@ namespace M1S04
                 int tipo = 0;
                 bool vidro = false;
                 string tipoDeCaixa = "";
-                string nome = "";
+                string? nome = "";
 
                 do {
                     Console.Write("Informe o tipo da bebida: (1-Refrigerante ou 2-Suco)\n");
@@ -108,13 +86,13 @@ namespace M1S04
                     break;
                 }
 
-                Console.WriteLine("Bebida cadastrada com sucesso! Aguarde 5 segundos para a tela carregar o display inicial");
-                Thread.Sleep(5000);
+                Console.WriteLine("Bebida cadastrada com sucesso! Aguarde a tela carregar o display inicial");
+                Thread.Sleep(3000);
             }
             catch (System.Exception)
             {
-                Console.WriteLine("Falha no preenchimentos dos dados ao inserir a bebida! Aguarde 5 segundos para a tela carregar o display inicial");
-                Thread.Sleep(5000);
+                Console.WriteLine("Falha no preenchimentos dos dados ao inserir a bebida! Aguarde a tela carregar o display inicial");
+                Thread.Sleep(3000);
             }
         }
 
@@ -125,10 +103,7 @@ namespace M1S04
         public static void AlterarBebida()
         {
             try
-            {       
-                int tipo = 0;
-                bool vidro = false;
-                string tipoDeCaixa = "";
+            {                       
                 int id = 0;
                 do {
                     Console.Write("Selecione qual bebida deseja alterar, informando o seu Id:\n");
@@ -137,7 +112,7 @@ namespace M1S04
                 } while(!ValorNumerico(opcao));                 
                 id = int.Parse(opcao);
 
-                Bebida bebidaAlterar = Repositorio.BuscarBebida(id);
+                Bebida? bebidaAlterar = Repositorio.BuscarBebida(id);
                 if(bebidaAlterar == null){
                     Console.Write("O Id informado para a bebida não existe! Aguarde 5 segundos para a tela carregar o display inicial\n");
                     Thread.Sleep(5000);
